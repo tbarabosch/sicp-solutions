@@ -55,3 +55,23 @@
 
 (define (cube-root x)
   (cube-iter 1.0 x))
+
+;; Exercise 1.11
+;; f(n) = n if n < 3
+;; f(n) = f(n-1) + 2f(n-2)+3f(n-3) if n >= 3
+
+(define (recursive-process n)
+  (if (< n 3)
+      n
+      (+ (+ (recursive-process (- n 1))
+	    (* 2 (recursive-process (- n 2))))
+         (* 3 (recursive-process (- n 3))))))
+
+(define (iterative-process n)
+  (define (iter a b c n)
+    (if (= n 0)
+	a
+	(iter b c (+ c (* 2 b) (* 3 a)) (- n 1))))
+  (iter 0 1 2 n))
+
+      
